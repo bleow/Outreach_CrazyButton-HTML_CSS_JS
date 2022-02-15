@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🤡 Crazy Button Workshop</title>
+    <title>Crazy Button Workshop</title>
   </head>
 
   <!-- loads styling library -->
@@ -44,7 +44,7 @@
 
         // it is you!
         if (socket.id == sid) {
-          textToDisplay = playerID + " 🤪 " + "[" + playerScore + "]";
+          textToDisplay = playerID + " (you!) " + "[" + playerScore + "]";
           listElement.appendChild(document.createTextNode(textToDisplay)); // insert text to display into list element
           playerListDisplay.prepend(listElement); // insert at top of the list
         } else {
@@ -77,8 +77,8 @@
       // left_offset = 1200 * 0.5 = 600
 
       // e.g for mobile with 400 x 800 resolution and 0.5 for randomTop and randomLeft
-      // top_offset = 400 * 0.5 = 400
-      // left_offset = 800 * 0.5 = 600
+      // top_offset = 400 * 0.5 = 200
+      // left_offset = 800 * 0.5 = 400
       let top_offset = maxHeight * randomTop;
       let left_offset = maxWidth * randomLeft;
 
@@ -136,10 +136,10 @@
         "
         onclick="handleButtonClick()"
       >
-        Catch Me! 🤡
+        Catch Me! :)
       </button>
 
-      <p>Connected players 🔗</p>
+      <p>Connected players:</p>
       <ul id="playerListDisplay"></ul>
     </div>
   </body>

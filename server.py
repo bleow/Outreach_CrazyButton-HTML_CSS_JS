@@ -5,9 +5,19 @@ from aiohttp import web
 from random import uniform
 
 # create a Socket.IO server
-sio = socketio.AsyncServer(cors_allowed_origins='*')
+sio = socketio.AsyncServer()
 app = web.Application()
 sio.attach(app)
+
+async def index(request):
+    with open('C:\\.PROGRAMMING\\HTML_CSS_JS\\OutreachWrkshp_CrazyButton-HTML_CSS_JS\\index.html') as f:
+        return web.Response(text=f.read(), content_type='text/html')
+
+
+## We bind our aiohttp endpoint to our app
+## router
+app.router.add_get('/', index)
+
 
 # keep track of list of connected players
 # {  player1_sid: score,
@@ -48,8 +58,8 @@ async def disconnect(sid):
 @sio.event
 async def button_pressed(sid):
     # randomTop and randonLeft is value between [0, 1]
-    randomTop = uniform(0, 1)
-    randomLeft = uniform(0, 1)
+    randomTop = uniform(0, 0.95)
+    randomLeft = uniform(0, 0.95)
 
     # increase player score by 1
     playerList[sid] += 1
