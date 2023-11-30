@@ -77,9 +77,14 @@ async def connect(sid, _):
     await sio.emit('player_connected', {'playerList': playerList})
 
 
-# a player has left
 @sio.on('disconnect')
 async def disconnect(sid):
+    """
+    A player has left the server.
+    https://python-socketio.readthedocs.io/en/latest/api.html#socketio.Server.on
+    :param sid: ID of player that left
+    :return:
+    """
     # remove player from playerList
     playerList.pop(sid)
 
@@ -88,9 +93,13 @@ async def disconnect(sid):
     await sio.emit('player_disconnected', {'playerList': playerList})
 
 
-# a player has pressed the button
 @sio.event
 async def button_pressed(sid):
+    """
+    A player has pressed the button.
+    :param sid: ID of player that pressed it
+    :return:
+    """
     # randomTop and randonLeft is value between [0, 1]
     randomTop = uniform(0, 0.95)
     randomLeft = uniform(0, 0.95)
@@ -108,8 +117,6 @@ async def button_pressed(sid):
             'playerList': playerList,
         })
 
-
-# end of event handlers
 
 # start server
 if __name__ == '__main__':
