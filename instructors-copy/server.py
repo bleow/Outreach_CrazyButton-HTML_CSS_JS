@@ -1,14 +1,33 @@
 # IMPORT // libraries that will help us with creating the backend server
+import logging
 import os
 from random import uniform
 from aiohttp import web
 import socketio
-
+from typing_extensions import TypeAlias, Dict
 
 # INITIALISATION // create a web app, web socket, and bind the web app to the web socket
-sio = socketio.AsyncServer()
+# https://docs.python.org/3/howto/logging-cookbook.html
+logger = logging.getLogger('crazy_button_logger')
+
+# https://python-socketio.readthedocs.io/en/latest/api.html#socketio.AsyncServer
+sio = socketio.AsyncServer(logging=logger)
+
+# https://python-socketio.readthedocs.io/en/latest/server.html#aiohttp
 app = web.Application()
 sio.attach(app)
+
+# https://docs.python.org/3/howto/logging-cookbook.html
+sio.logger.setLevel(logging.DEBUG)
+format = logging.Formatter('==== CRAZY BUTTON LOGS : %(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+fh = logging.FileHandler('debug.log')
+fh.setFormatter(format)
+sio.logger.addHandler(fh)
+
+ch = logging.StreamHandler()
+ch.setFormatter(format)
+sio.logger.addHandler(ch)
 
 
 async def index(request):
@@ -23,8 +42,7 @@ async def index(request):
         return web.Response(text=f.read(), content_type='text/html')
 
 
-## We bind our aiohttp endpoint to our app
-## router
+# ROUTING // bind our aiohttp endpoint to our app router
 app.router.add_get('/', index)
 
 # keep track of list of connected players
@@ -33,15 +51,23 @@ app.router.add_get('/', index)
 #    player3_sid: score,
 #    ...
 # }
-playerList = {}
+# https://docs.python.org/3/library/typing.html#type-aliases
+PlayerSid: TypeAlias = str
+Score: TypeAlias = int
+PlayerList: TypeAlias = Dict[PlayerSid, Score]
+playerList: PlayerList = {}
 
 
-# start of event handlers
-# a player has joined
-@sio.event
+@sio.on('connect')
 async def connect(sid, _):
-    # print when new player has connected
-    print('new player : ', sid)
+    """
+    A player has joined the server.
+    https://python-socketio.readthedocs.io/en/latest/api.html#socketio.Server.on
+    :param sid: ID of player that joined
+    :param _: Web Server Gateway Interface (WSGI) environment https://www.fullstackpython.com/wsgi-servers.html
+    :return: False to reject the connection or null
+    """
+    sio.logger.info(f'New player joined: {sid}')
 
     # add player to playerList with initial score of 0
     playerList[sid] = 0
@@ -52,7 +78,7 @@ async def connect(sid, _):
 
 
 # a player has left
-@sio.event
+@sio.on('disconnect')
 async def disconnect(sid):
     # remove player from playerList
     playerList.pop(sid)
