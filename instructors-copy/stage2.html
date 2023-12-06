@@ -1,0 +1,107 @@
+<!-- index.html -->
+<!--
+Stage 2
+Purpose: 
+- Add score counting and fix some leftover issues
+Key points:
+- JS
+  - Global variables
+  - How to load data from variables into DOM
+  - Template literals
+  - Conditional (ternary) operator
+- Manipulating DOM using JS
+  - How to change element values
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Crazy Button Workshop</title>
+  </head>
+
+  <!-- start of helper functions -->
+  <script>
+    // Global Variables
+    let playerListData = {"myself":0};
+
+    function clearPlayerList() {
+      document.getElementById("playerListDisplay").textContent = "";
+    }
+
+    function drawPlayerList(playerListData) {
+      for (sid in playerListData) {
+        // extract playerID and playerScore
+        let playerID = sid;
+        let playerScore = playerListData[sid];
+
+        // get the place we want to put the textToDislay
+        let playerListDisplay = document.getElementById("playerListDisplay");
+
+        // create a list item to insert textToDisplay
+        let listElement = document.createElement("li");
+
+        // craft the text to display
+        let textToDisplay;
+
+        // it is you!
+        // textToDisplay = playerID + " " + "[" + playerScore + "]"; // string concat
+        textToDisplay = `${playerID} [${playerScore}]`; // tempalte literal
+        listElement.appendChild(document.createTextNode(textToDisplay)); // insert text to display into list element
+        playerListDisplay.prepend(listElement); // insert at top of the list
+        
+      }
+    }
+    // given randomTop and randomLeft values,
+    // move button to new location using random values
+    function moveButtonToLocation(randomTop, randomLeft) {
+      // to adapt button position to screen size;
+      let maxHeight = window.innerHeight;
+      let maxWidth = window.innerWidth;
+      
+      // x and y offset of button relative to the browser
+      // screen size
+      // randomTop and randomLeft are value between [0, 1] sent from server
+
+      // e.g for laptop with 1200 x 800 resolution and 0.5 for randomTop and randomLeft
+      // top_offset = 800 * 0.5 = 400
+      // left_offset = 1200 * 0.5 = 600
+
+      // e.g for mobile with 400 x 800 resolution and 0.5 for randomTop and randomLeft
+      // top_offset = 400 * 0.5 = 200
+      // left_offset = 800 * 0.5 = 400
+      let top_offset = maxHeight * randomTop;
+      let left_offset = maxWidth * randomLeft;
+      // set new button location
+      let button = document.getElementById("button");
+      button.style.top = top_offset + "px";
+      button.style.left = left_offset + "px";
+    }
+
+    function handleButtonClick() {
+      playerListData["myself"] += 1;
+      clearPlayerList();
+      drawPlayerList(playerListData);
+      let randomTop = Math.random();
+      let randomLeft = Math.random()
+      // Clips the value so that the button does not go out of bounds
+      randomTop = randomTop <= 0.95 ? randomTop : 0.95
+      randomLeft = randomLeft <= 0.95 ? randomLeft : 0.95
+      moveButtonToLocation(randomTop, randomLeft);
+
+    }
+  </script>
+
+  <!-- end of helper functions -->
+
+  <body>
+    <div class="container">
+      <button id="button" style="position:absolute;" onclick= "handleButtonClick()">
+        Catch Me! :)
+      </button>
+
+      <p>Connected players:</p>
+      <ul id="playerListDisplay">
+        <li>Myself</li>
+      </ul>
+    </div>
+  </body>
+</html>
