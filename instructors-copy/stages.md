@@ -25,6 +25,7 @@ I have split the code into 5 stages, where each stage is a standalone milestone.
         - Conditional (ternary) operator
     - Manipulating DOM using JS
         - How to change element values (score)
+        - Why do we need to cut the offset to 0.95?
 
 ## Stage 3 (Server)
 - Purpose: 
@@ -65,3 +66,21 @@ I have split the code into 5 stages, where each stage is a standalone milestone.
 - Key points:
     - How to use css
     - Mark player on playerList
+
+# Talking points
+Here are some points of interest that can be engaged upon
+
+- What is `async` and `await`?
+- Are there cases where the `index()` function should be a coroutine function?
+- Why is `logging` preferred over `print`?
+- What are type aliases and how are they different from type hinting?
+- Why do we use tailwind css instead of our own css?
+- What is the difference between `var` and `let`?
+- What are the bunch of meta data in index.html for?
+
+Some additional coding challenges
+- How to migrate js and css out of html into their own files?
+- How to sort the list accoding to score?
+- Polish the app using css
+- How to prevent the button from blocking the scoreboard?
+- How to bold your name?
