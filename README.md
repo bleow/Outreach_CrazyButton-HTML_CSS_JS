@@ -6,9 +6,14 @@ Crazy Button (Web Programming)
 - Python Flask
 - Websockets
 
+Materials
+- [Slides](https://drive.google.com/drive/folders/1LPxmzw8eNIYkRgiI9W0mzAPoXGW4gnVX?usp=sharing)
+- [Facilitators' Notes](https://github.com/bleow/Outreach_CrazyButton-HTML_CSS_JS/blob/main/instructors-copy/stages.md)
+
 Previous run: AY21/22 Sem 1
 
 ----
+## How to run
 
 `cd [directory]`
 
