@@ -28,32 +28,30 @@
     }
 
     function drawPlayerList(playerListData) {
-      for (sid in playerListData) {
+      // get the place we want to put the textToDisplay
+      const playerListDisplay = document.getElementById("playerListDisplay");
+
+      Object.entries(playerListData).forEach(([sid, playerScore]) => {
         // extract playerID and playerScore
-        let playerID = sid.slice(0, 4); //sid is too long, we take the first 4 characters
-        let playerScore = playerListData[sid];
+        const playerID = sid.slice(0, 4); //sid is too long, we take the first 4 characters
 
-        // get the place we want to put the textToDislay
-        let playerListDisplay = document.getElementById("playerListDisplay");
-
-        // create a list element to insert textToDisplay
-        let listElement = document.createElement("li");
+        // is it you?
+        const isCurrentUser = socket.id === sid;
 
         // craft the text to display
-        let textToDisplay;
+        const textToDisplay = `${playerID}${isCurrentUser ? " (you!) " : ""}[${playerScore}]`;
 
-        // it is you!
-        if (socket.id == sid) {
-          textToDisplay = playerID + " (you!) " + "[" + playerScore + "]";
-          listElement.appendChild(document.createTextNode(textToDisplay)); // insert text to display into list element
+        // create a list element to insert textToDisplay
+        const listElement = document.createElement("li");
+        listElement.textContent = textToDisplay;
+
+        if (isCurrentUser) { // it is you!
+          listElement.classList.add('current-user'); // insert text to display into list element
           playerListDisplay.prepend(listElement); // insert at top of the list
-        } else {
-          // it is not you!
-          textToDisplay = playerID + "[" + playerScore + "]";
-          listElement.appendChild(document.createTextNode(textToDisplay)); // insert text to display into list element
+        } else { // it is not you!
           playerListDisplay.append(listElement); // insert anywhere
         }
-      }
+      });
     }
 
     function reDrawPlayerList(playerListData) {
@@ -65,8 +63,8 @@
     // move button to new location using random values
     function moveButtonToLocation(randomTop, randomLeft) {
       // to adapt button position to screen size;
-      let maxHeight = window.innerHeight;
-      let maxWidth = window.innerWidth;
+      const maxHeight = window.innerHeight;
+      const maxWidth = window.innerWidth;
 
       // x and y offset of button relative to the browser
       // screen size
@@ -79,13 +77,13 @@
       // e.g for mobile with 400 x 800 resolution and 0.5 for randomTop and randomLeft
       // top_offset = 400 * 0.5 = 200
       // left_offset = 800 * 0.5 = 400
-      let top_offset = maxHeight * randomTop;
-      let left_offset = maxWidth * randomLeft;
+      const top_offset = maxHeight * randomTop;
+      const left_offset = maxWidth * randomLeft;
 
       // set new button location
-      let button = document.getElementById("button");
-      button.style.top = top_offset + "px";
-      button.style.left = left_offset + "px";
+      const button = document.getElementById("button");
+      button.style.top = `${top_offset}px`;
+      button.style.left = `${left_offset}px`;
     }
   </script>
 
@@ -114,6 +112,11 @@
     function handleButtonClick() {
       socket.emit("button_pressed");
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById("button");
+      button.addEventListener('click', handleButtonClick);
+    });
   </script>
   <!-- end of socket logic -->
 
@@ -134,7 +137,6 @@
           hover:border-red-500
           rounded
         "
-        onclick="handleButtonClick()"
       >
         Catch Me! :)
       </button>
