@@ -13,12 +13,48 @@ Key points:
 - Inline css
   - position:absolute and what it means
 -->
+
+<!--
+Stage 2
+Purpose:
+- Add score counting and fix some leftover issues
+Key points:
+- JS
+  - Global variables
+  - How to load data from variables into DOM
+  - Template literals
+  - Conditional (ternary) operator
+- Manipulating DOM using JS
+  - How to change element values
+  - Why do we need to cut the offset to 0.95?
+-->
+
 <!DOCTYPE html>
 <html lang="en">
-  <!-- TODO -->
+  <!-- TODO stage 1 -->
 
   <!-- start of helper functions -->
   <script>
+    function clearPlayerList() {
+      <!-- TODO stage 2 -->
+    }
+
+    function drawPlayerList(playerListData) {
+      <!-- TODO stage 2 -->
+      // extract playerID and playerScore
+
+      // get the place we want to put the textToDislay
+
+      // create a list item to insert textToDisplay
+
+      // craft the text to display using template literal
+      textToDisplay = `${playerID} [${playerScore}]`
+
+      // append text node to display into list element
+
+      // prepend to the top of the list
+    }
+
     // given randomTop and randomLeft values,
     // move button to new location using random values
     function moveButtonToLocation(randomTop, randomLeft) {
@@ -37,13 +73,17 @@ Key points:
       // e.g for mobile with 400 x 800 resolution and 0.5 for randomTop and randomLeft
       // top_offset = 400 * 0.5 = 200
       // left_offset = 800 * 0.5 = 400
-      <!-- TODO -->
+      <!-- TODO stage 1 -->
+
       // set new button location
-      <!-- TODO -->
+      <!-- TODO stage 1 -->
     }
 
     function handleButtonClick() {
-      <!-- TODO -->
+      <!-- TODO stage 1 -->
+
+      // Clips the value so that the button does not go out of bounds
+      <!-- TODO stage 2: sometimes the button goes out of bounds. the value we set should not be too close to 1, e.g. max should be 0.95. hint: ternary operator -->
       moveButtonToLocation(randomTop, randomLeft);
     }
   </script>
@@ -52,13 +92,13 @@ Key points:
 
   <body>
     <div class="container">
-      <!-- TODO -->
+      <!-- TODO stage 1 -->
       <button id="button" style="position:absolute;">
         Catch Me! :)
       </button>
 
       <p>Connected players: (make a list here)</p>
-      <!-- TODO -->
+      <!-- TODO stage 1 -->
     </div>
   </body>
 </html>
