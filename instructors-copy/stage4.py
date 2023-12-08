@@ -19,7 +19,6 @@ from typing_extensions import TypeAlias, Dict
 from aiohttp import web
 import socketio
 
-
 ### Initialisation -> create a web app, web socket, and bind the web app to the web socket
 # https://docs.python.org/3/howto/logging-cookbook.html
 logger = logging.getLogger('crazy_button_logger')
@@ -44,7 +43,6 @@ sio.logger.addHandler(fh)
 ch = logging.StreamHandler()
 ch.setFormatter(format)
 sio.logger.addHandler(ch)
-
 
 ### Global variables and type hinting
 # Keep track of list of connected players
@@ -73,7 +71,8 @@ def index(request):
     INDEX_DIRECTORY = CUR_DIRECTORY + '\\stage4.html'
     with open(INDEX_DIRECTORY) as f:
         return web.Response(text=f.read(), content_type='text/html')
-    
+
+
 @sio.on('connect')
 async def connect(sid, _):
     """
@@ -109,7 +108,7 @@ async def disconnect(sid):
     await sio.emit('player_disconnected', {'playerList': playerList})
 
 
-@sio.event # Simplified version of the sio.on() method that takes the event name from the decorated function
+@sio.event  # Simplified version of the sio.on() method that takes the event name from the decorated function
 async def button_pressed(sid):
     """
     A player has pressed the button.
@@ -139,4 +138,4 @@ app.router.add_get('/', index)
 
 # start server
 if __name__ == '__main__':
-    web.run_app(app, port= 8080)
+    web.run_app(app, port=8080)
