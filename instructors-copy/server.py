@@ -11,7 +11,7 @@ from typing_extensions import TypeAlias, Dict
 logger = logging.getLogger('crazy_button_logger')
 
 # https://python-socketio.readthedocs.io/en/latest/api.html#socketio.AsyncServer
-sio = socketio.AsyncServer(logging=logger)
+sio = socketio.AsyncServer(logging=logger, cors_allowed_origins='*')
 
 # https://python-socketio.readthedocs.io/en/latest/server.html#aiohttp
 app = web.Application()
