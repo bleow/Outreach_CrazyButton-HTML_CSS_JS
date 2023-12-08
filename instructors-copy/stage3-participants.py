@@ -11,11 +11,10 @@ Key points:
 import os
 from aiohttp import web
 
+
 # INITIALISATION // create a web app
-
 # https://python-socketio.readthedocs.io/en/latest/server.html#aiohttp
-app = web.Application()
-
+# TODO stage 3: make web app
 
 def index(request):
     """
@@ -23,9 +22,8 @@ def index(request):
     :param request: Request instance
     :return: StreamResponse-derived (e.g. Response) instance
     """
-    CUR_DIRECTORY = os.getcwd()
-    INDEX_DIRECTORY = CUR_DIRECTORY + '\\stage2.html'
-    with open(INDEX_DIRECTORY) as f:
+    DIRECTORY = "" # TODO stage 3: get directory of index.html
+    with open(DIRECTORY) as f:
         return web.Response(text=f.read(), content_type='text/html')
 
 
@@ -33,5 +31,4 @@ def index(request):
 app.router.add_get('/', index)
 
 # start server
-if __name__ == '__main__':
-    web.run_app(app, port=8080)
+# TODO stage 3: write code to start the server
