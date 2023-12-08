@@ -31,10 +31,16 @@ Key points:
 
 <!DOCTYPE html>
 <html lang="en">
-  <!-- TODO stage 1 -->
+  <!-- TODO stage 1: website title -->
+
+  <!-- loads socket.io javascript library -->
+  <script>
+      <!-- TODO stage 4 -->
+  </script>
 
   <!-- start of helper functions -->
   <script>
+    <!-- TODO stage 2: global variable -->
     function clearPlayerList() {
       <!-- TODO stage 2 -->
     }
@@ -53,6 +59,10 @@ Key points:
       // append text node to display into list element
 
       // prepend to the top of the list
+    }
+
+    function reDrawPlayerList() {
+      // TODO stage 4: write this function
     }
 
     // given randomTop and randomLeft values,
@@ -85,20 +95,31 @@ Key points:
       // Clips the value so that the button does not go out of bounds
       <!-- TODO stage 2: sometimes the button goes out of bounds. the value we set should not be too close to 1, e.g. max should be 0.95. hint: ternary operator -->
       moveButtonToLocation(randomTop, randomLeft);
+
+      <!-- TODO stage 4: the logic here should be moved to server side -->
     }
   </script>
 
   <!-- end of helper functions -->
 
+  <!-- TODO stage 4: code the socket logic -->
+  <script>
+    // new player connected
+
+    // current player disconnected
+
+    // button was pressed and server emits new_button_location event
+  </script>
+
   <body>
     <div class="container">
-      <!-- TODO stage 1 -->
+      <!-- TODO stage 1: link button to js function on click -->
       <button id="button" style="position:absolute;">
         Catch Me! :)
       </button>
 
       <p>Connected players: (make a list here)</p>
-      <!-- TODO stage 1 -->
+      <!-- TODO stage 1: make list in html -->
     </div>
   </body>
 </html>

@@ -81,6 +81,9 @@ Key points:
       button.style.left = left_offset + "px";
     }
 
+    function handleButtonClick() {
+      socket.emit("button_pressed");
+    }
   </script>
 
   <!-- end of helper functions -->
@@ -105,9 +108,6 @@ Key points:
       reDrawPlayerList(data.playerList);
     });
 
-    function handleButtonClick() {
-      socket.emit("button_pressed");
-    }
   </script>
   <!-- end of socket logic -->
 
