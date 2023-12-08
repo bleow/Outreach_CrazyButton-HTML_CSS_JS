@@ -37,7 +37,7 @@ async def index(request):
     :return: StreamResponse-derived (e.g. Response) instance
     """
     CUR_DIRECTORY = os.getcwd()
-    INDEX_DIRECTORY = CUR_DIRECTORY + '\\index.html'
+    INDEX_DIRECTORY = CUR_DIRECTORY + '/index.html'
     with open(INDEX_DIRECTORY) as f:
         return web.Response(text=f.read(), content_type='text/html')
 
