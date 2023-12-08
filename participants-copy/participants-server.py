@@ -19,6 +19,14 @@ Key points:
 - Type alias/hinting
 """
 
+"""
+Stage 5 - Server
+Purpose: 
+- Clean up and fix button initial location bug
+Key points:
+- Sending signals to specific users
+"""
+
 # IMPORT // libraries that will help us with creating the backend server
 import os
 from aiohttp import web

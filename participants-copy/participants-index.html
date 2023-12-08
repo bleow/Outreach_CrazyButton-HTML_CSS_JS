@@ -29,9 +29,32 @@ Key points:
   - Why do we need to cut the offset to 0.95?
 -->
 
+<!--
+Stage 4 - Client
+Purpose:
+- Linking client to server with socket
+Key points:
+- How to import libraries
+- How to listen to and emit socket signals
+- Transferring logic from client to server
+- String slicing
+-->
+
+<!--
+Stage 5 - Client
+Purpose:
+- CSS and polish
+Key points:
+- How to use css
+- Mark player on playerList
+-->
+
 <!DOCTYPE html>
 <html lang="en">
   <!-- TODO stage 1: website title -->
+
+  <!-- loads styling library -->
+  <!-- TODO stage 5 -->
 
   <!-- loads socket.io javascript library -->
   <script>
@@ -114,12 +137,14 @@ Key points:
   <body>
     <div class="container">
       <!-- TODO stage 1: link button to js function on click -->
+      <!-- TODO stage 5: style this button to your liking -->
       <button id="button" style="position:absolute;">
         Catch Me! :)
       </button>
 
       <p>Connected players: (make a list here)</p>
       <!-- TODO stage 1: make list in html -->
+      <!-- TODO stage 4: you no longer need a list in html, reference a javascript object by id instead
     </div>
   </body>
 </html>
