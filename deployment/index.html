@@ -91,7 +91,7 @@
 
   <!-- start of socket logic -->
   <script>
-    const socket = io.connect('https://crazy-button.onrender.com:8080');
+    const socket = io.connect();
 
     // new player connected
     socket.on("player_connected", (data) => {
